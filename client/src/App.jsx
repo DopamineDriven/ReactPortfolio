@@ -1,16 +1,22 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import ReactDOM from 'react-dom';
+import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
-import './bootstrap.min.css';
+import Navbar from './components/Navbar/Navbar.jsx';
+import Home from './components/Home/Home.jsx';
+import Contact from './components/Contact/Contact.jsx';
+import Portfolio from './components/Portfolio/Portfolio.jsx' 
 
-class App extends Component {
-    render() {
-        return (
-            <div>React Portfolio</div>
-        )
-    }
+const App = () => {
+    return (
+        <BrowserRouter>
+            <Navbar />
+            <React.Fragment>
+                <Route exact path = "/" component={Home} />
+                <Route exact path = "/portfolio" component={Portfolio} />
+                <Route exact path = "/contact" component={Contact} />
+            </React.Fragment>
+            
+        </BrowserRouter>
+    )
 }
-
 export default App;
