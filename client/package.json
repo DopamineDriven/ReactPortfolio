@@ -35,5 +35,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "^1.19.1",
+    "react-hooks": "^1.0.1",
+    "react-performance": "0.0.5"
   }
 }
