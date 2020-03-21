@@ -15,7 +15,7 @@ const projectData = [
         independent: false,
         favorite: true,
         overview:
-          "React, React Hooks"
+          "React, React Hooks, axios, createContext"
       },
       {
         id: 11,

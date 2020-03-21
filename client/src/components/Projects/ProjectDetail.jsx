@@ -1,32 +1,30 @@
-import ImageToggleOnScroll from '../Effects/ImageToggleOnScroll.jsx';
+import ImageToggleOnScroll from './Effects/ImageToggleOnScroll.jsx';
 
-const SpeakerDetail = ({
+const ProjectDetail = ({
     id,
-    firstName,
-    lastName,
-    favorite,
+    title,
     overview,
-    onHeartFavoriteHandler
+    onFavoriteCardioHandler
 }) => {
     return (
         <div className="card col-4 cardmin">
             <ImageToggleOnScroll  
                 className="card-img-top"
-                primaryImg={`/static/speakers/bw/Speaker-${id}.jpg`}
-                secondaryImg={`/static/speakers/Speaker-${id}.jpg`}
-                alt={`${firstName} ${lastName}`}
+                primaryImg={`../../img/images/bw/${id}.jpg`}
+                secondaryImg={`../../img/images/${id}.jpg`}
+                alt={`${title}`}
             />
             <div className="card-body">
                 <h4 className="card-title">
                     <button 
                         data-sessionid={id}
-                        className={`${favorite ? "heartbutton" : "heartdarkbutton"}`}
+                        className={`${favorite ? "hearbutton" : "heartdarkbutton"}`}
                         onClick={e => {
-                            onHeartFavoriteHandler(e, !favorite)
-                        }} 
+                            onFavoriteCardioHandler(e, !favorite)
+                        }}
                     />
                     <span>
-                        {firstName} {lastName}
+                        {title}
                     </span>
                 </h4>
                 <span>
@@ -37,4 +35,4 @@ const SpeakerDetail = ({
     )
 };
 
-export default SpeakerDetail;
+export default ProjectDetail;

@@ -1,127 +1,126 @@
-import React, { useState, useEffect} from "react";
-import "../static/site.css";
+import React, { useState, useEffect } from "react";
+import "./site.css";
 import { Header } from "../src/Header";
-import { Menu } from "../src/Menu";
-import SpeakerData from "./SpeakerData";
-import SpeakerDetail from "./SpeakerDetail";
+import { Navbar } from "../Navbar/Navbar.jsx";
+import ProjectData from "./SpeakerData";
+import ProjectDetail from "./SpeakerDetail";
 
-const Speakers = ({}) => {
-  const [speakingSaturday, setSpeakingSaturday] = useState(true);
-  const [speakingSunday, setSpeakingSunday] = useState(true);
+const Projects = ({}) => {
+  const [independentProject, setIndependentProject] = useState(true);
+  const [bootcampProject, setBootcampProject] = useState(true);
 
-  const [speakerList, setSpeakerList] = useState([]);
+  const [projectList, setProjectList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoading(true);
-    new Promise(function(resolve) {
-      setTimeout(function() {
-        resolve();
+    setIsLoading(true)
+    new Promise((resolve) => {
+      setTimeout(() => {
+        resolve()
       }, 1000);
     }).then(() => {
-      setIsLoading(false);
-      const speakerListServerFilter = SpeakerData.filter(({ sat, sun }) => {
-        return (speakingSaturday && sat) || (speakingSunday && sun);
-      });
-      setSpeakerList(speakerListServerFilter);
-    });
+      setIsLoading(false)
+      const projectListServerFilter = ProjectData.filter(({ bootcamp, independent }) => {
+        return (bootcampProject && bootcamp) || (independentProject && independent);
+      })
+      setProjectList(projectListServerFilter)
+    })
     return () => {
-      console.log("cleanup");
-    };
-  }, []); // [speakingSunday, speakingSaturday]);
+      console.log("cleanup")
+    }
+  }, []) // [bootcampProject, independentProject]
+  const handleChangeBootcamp = () => {
+    setBootcampProject(!bootcampProject)
+  }
 
-  const handleChangeSaturday = () => {
-    setSpeakingSaturday(!speakingSaturday);
-  };
-
-  const speakerListFiltered = isLoading
-    ? []
-    : speakerList
-        .filter(
-          ({ sat, sun }) => (speakingSaturday && sat) || (speakingSunday && sun)
-        )
-        .sort(function(a, b) {
-          if (a.firstName < b.firstName) {
-            return -1;
+  const projectListFiltered = isLoading
+    ? [] : projectList
+      .filter(
+        ({ bootcamp, independent }) => (bootcampProject && bootcamp) || (independentProject && independent)
+      )
+        .sort(function(a,b) {
+          if (a.title < b.title) {
+            return -1
           }
-          if (a.firstName > b.firstName) {
-            return 1;
+          if (a.title > b.title) {
+            return 1
           }
-          return 0;
+          return 0
         });
 
-  const handleChangeSunday = () => {
-    setSpeakingSunday(!speakingSunday);
-  };
+  const handleChangeIndependent = () => {
+    setIndependentProject(!independentProject)
+  }
 
-  const heartFavoriteHandler = (e, favoriteValue) => {
+  const cardioFavoriteHandler = (e, favoriteValue) => {
     e.preventDefault();
-    const sessionId = parseInt(e.target.attributes["data-sessionid"].value);
-    setSpeakerList(speakerList.map(item => {
+    const sessionId = parseInt(e.target.attribute["data-sessionid"].value);
+    setProjectList(projectList.map(item => {
       if (item.id === sessionId) {
         item.favorite = favoriteValue;
-        return item;
+        return item
       }
       return item;
-    }));
-    //console.log("changing session favorte to " + favoriteValue);
+    }))
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return (
+    <div>
+      Loading...
+    </div>
+  )
 
   return (
     <div>
-      <Header />
-      <Menu />
+      <Navbar />
       <div className="container">
-        <div className="btn-toolbar  margintopbottom5 checkbox-bigger">
+        <div className="btn-toolbar mt-5 mb-5 checkbox-bigger">
           <div className="hide">
             <div className="form-check-inline">
               <label className="form-check-label">
-                <input
-                  type="checkbox"
+                <input 
+                  type="checkbox" 
                   className="form-check-input"
-                  onChange={handleChangeSaturday}
-                  checked={speakingSaturday}
+                  onChange={handleChangeBootcamp}
+                  checked={bootcampProject}
                 />
-                Saturday Speakers
+                Bootcamp Projects
               </label>
             </div>
             <div className="form-check-inline">
               <label className="form-check-label">
-                <input
-                  type="checkbox"
+                <input 
+                  type="checkbox" 
                   className="form-check-input"
-                  onChange={handleChangeSunday}
-                  checked={speakingSunday}
+                  onChange={handleChangeIndependent}
+                  checked={independentProject}
                 />
-                Sunday Speakers
+                Independent Projects
               </label>
             </div>
           </div>
         </div>
         <div className="row">
           <div className="card-deck">
-            {speakerListFiltered.map(
-              ({ id, firstName, lastName, overview, favorite }) => {
-                return (
-                  <SpeakerDetail
-                    key={id}
-                    id={id}
-                    favorite={favorite}
-                    onHeartFavoriteHandler={heartFavoriteHandler}
-                    firstName={firstName}
-                    lastName={lastName}
-                    overview={overview}
-                  />
-                );
-              }
-            )}
+              {projectListFiltered.map(
+                ({ id, title, overview, favorite }) => {
+                  return (
+                    <ProjectDetail  
+                      key={id}
+                      id={id}
+                      favorite={favorite}
+                      onFavoriteCardioHandle={cardioFavoriteHandler}
+                      title={title}
+                      overview={overview}
+                    />
+                  )
+                }
+              )}
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 };
 
-export default Speakers;
+export default Projects;

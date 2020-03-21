@@ -1,3 +1,4 @@
+// exported to ../Projects/ProjectDetail.jsx
 import React, {useRef, useEffect, useState} from "react";
 
 const ImageToggleOnScroll = ({ primaryImg, secondaryImg }) => {
