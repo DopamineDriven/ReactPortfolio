@@ -1,4 +1,4 @@
-import ImageToggleOnScroll from './ImageToggleOnScroll.jsx';
+import ImageToggleOnScroll from '../Effects/ImageToggleOnScroll.jsx';
 
 const SpeakerDetail = ({
     id,
