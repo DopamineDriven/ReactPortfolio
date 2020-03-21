@@ -1,6 +1,6 @@
 import React from 'react';
 import Container from '../Container/Container.jsx'
-import ImageChangeOnMouseOver from './imageEffects/imageChangeOnMouseOver.jsx'
+import ImageChangeOnMouseOver from './imageEffects/ImageChangeOnMouseOver.jsx'
 
 const Home = () => {
     return (
