@@ -3,8 +3,8 @@ import React from 'react';
 // anything we put in folder titled static will be available to our app
 // with the /static reference
 import ImageToggleOnMouseOver from './ImageToggleOnMouseOver.jsx';
-import colorImg from '../../../img/images/1.5.jpg';
-import bwImage from '../../../img/images/1.jpg';
+import colorImg from '../../../img/images/1.jpg';
+import bwImage from '../../../img/images/bw/1.jpg';
 
 
 const ImageChangeOnMouseOver = () => {
