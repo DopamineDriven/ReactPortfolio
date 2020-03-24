@@ -1,19 +1,28 @@
 import React from "react";
 import './Navbar.css';
+import { Content, Layout, Header, Drawer, Navigation } from  'react-mdl'
 
-function Navbar() {
+const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a className="navbar-brand" href="/">
-        Home
-      </a>
-      <a className="navbar-brand" href="/contact">
-        Contact
-      </a>
-      <a className="navbar-brand" href="/portfolio">
-        Portfolio
-      </a>
-    </nav>
+    <div style={{height: '100px', position: 'relative'}}>
+      <Layout fixedHeader>
+          <Header transparent>
+            <Navigation className="Navbar">
+                  <a href="/">Home</a>
+                  <a href="/contact">Contact</a>
+                  <a href="/portfolio">Portfolio</a>
+            </Navigation>
+          </Header>
+          <Drawer>
+              <Navigation className="Navbar-Drawer">
+                  <a href="/">Home</a>
+                  <a href="/contact">Contact</a>
+                  <a href="/portfolio">Portfolio</a>
+              </Navigation>
+          </Drawer>
+          <Content />
+      </Layout>
+  </div>
   )
 }
 
